@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS "point" CASCADE;
-DROP TABLE IF EXISTS "ladle" CASCADE;
+DROP TABLE IF EXISTS "laddle" CASCADE;
 DROP TABLE IF EXISTS "property" CASCADE;
 DROP TABLE IF EXISTS "refractory" CASCADE;
 DROP TABLE IF EXISTS "shop" CASCADE;
@@ -23,7 +23,7 @@ VALUES (1, 'Пиздатый цех');
 
 -- ************************************** "Ladle"
 
-CREATE TABLE "ladle"
+CREATE TABLE "laddle"
 (
     "id"      int         NOT NULL,
     "name"    varchar(50) NOT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE "ladle"
     PRIMARY KEY (id)
 );
 
-CREATE INDEX "fkIdx_29" ON "ladle"
+CREATE INDEX "fkIdx_29" ON "laddle"
     (
      "shop_id"
         );
@@ -41,16 +41,16 @@ CREATE INDEX "fkIdx_29" ON "ladle"
 
 CREATE TABLE "zone"
 (
-    "id"       int         NOT NULL,
-    "name"     varchar(50) NOT NULL,
-    "ladle_id" int         NOT NULL,
-    CONSTRAINT "FK_37" FOREIGN KEY ("ladle_id") REFERENCES "ladle" ("id"),
+    "id"        int         NOT NULL,
+    "name"      varchar(50) NOT NULL,
+    "laddle_id" int         NOT NULL,
+    CONSTRAINT "FK_37" FOREIGN KEY ("laddle_id") REFERENCES "laddle" ("id"),
     PRIMARY KEY (id)
 );
 
 CREATE INDEX "fkIdx_37" ON "zone"
     (
-     "ladle_id"
+     "laddle_id"
         );
 
 
