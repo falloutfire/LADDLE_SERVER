@@ -251,7 +251,7 @@ create table ClientDetails
 INSERT INTO oauth_client_details
 (client_id, client_secret, scope, authorized_grant_types,
  authorities, access_token_validity, refresh_token_validity)
-VALUES ('mobile_app_client', '$2a$04$2R.wNqw3EYqh0tqobaknAO00ZNUDPqMn7Y0kWSjXqtQm8EW012wk.', 'read,write',
+VALUES ('app_client', '$2a$12$fFEZR4h7MHrOTu1Bg/R.Eup.JYeULc8p9L9eCAU/pZDqTS5gI.i.S', 'read,write',
         'password,refresh_token,client_credentials,authorization_code', 'ROLE_CLIENT,ROLE_TRUSTED_CLIENT', 900, 2000);
 
 
