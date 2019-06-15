@@ -1,5 +1,6 @@
 package com.manny.Laddle.Entities
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.*
 
 @Entity
@@ -37,6 +38,7 @@ class User(
     var roles: List<Role>? = null,
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shop_id", nullable = false)
+    @JsonIgnore
     var shopId: Shop?
 )
 

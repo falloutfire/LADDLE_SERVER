@@ -1,5 +1,6 @@
 package com.manny.Laddle.Entities
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.*
 
 @Entity
@@ -12,6 +13,7 @@ class Zone(
     val name: String,
     @ManyToOne
     @JoinColumn(name = "laddle_id", nullable = false)
+    @JsonIgnore
     var laddle: Laddle?,
     @OneToMany(mappedBy = "zone")
     var listPoint: List<Point>,

@@ -1,5 +1,6 @@
 package com.manny.Laddle.Entities
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.*
 
 @Entity
@@ -14,5 +15,6 @@ class Point(
     val y: Int,
     @ManyToOne
     @JoinColumn(name = "zone_id", nullable = false)
+    @JsonIgnore
     var zone: Zone?
 )

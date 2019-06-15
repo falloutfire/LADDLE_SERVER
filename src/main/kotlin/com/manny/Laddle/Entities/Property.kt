@@ -1,5 +1,6 @@
 package com.manny.Laddle.Entities
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.*
 
 @Entity
@@ -16,5 +17,6 @@ class Property(
     val type: String,
     @ManyToOne
     @JoinColumn(name = "refractory_id", nullable = false)
+    @JsonIgnore
     var refractory: Refractory?
 )

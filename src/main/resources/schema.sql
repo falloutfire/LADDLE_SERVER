@@ -38,6 +38,8 @@ CREATE INDEX "fkIdx_29" ON "laddle"
      "shop_id"
         );
 
+INSERT INTO laddle(id, name, photo, shop_id)
+VALUES (1, 'Пиздатый ladle', '1', 1);
 
 CREATE TABLE "zone"
 (
@@ -53,7 +55,8 @@ CREATE INDEX "fkIdx_37" ON "zone"
      "laddle_id"
         );
 
-
+INSERT INTO zone(id, name, laddle_id)
+VALUES (1, 'Пиздатый zone', 1);
 -- ************************************** "Refractory"
 
 CREATE TABLE "refractory"
@@ -65,11 +68,14 @@ CREATE TABLE "refractory"
     PRIMARY KEY (id)
 );
 
+
 CREATE INDEX "fkIdx_44" ON "refractory"
     (
      "zone_id"
         );
 
+INSERT INTO refractory(id, name, zone_id)
+VALUES (1, 'Пиздатый refractory', 1);
 -- ************************************** "Property"
 
 CREATE TABLE "property"
@@ -88,6 +94,8 @@ CREATE INDEX "fkIdx_53" ON "property"
      "refractory_id"
         );
 
+INSERT INTO property(id, name, value, refractory_id, type)
+VALUES (1, 'Пиздатый property', 1, 1, 'type');
 -- ************************************** "Point"
 
 CREATE TABLE "point"
@@ -104,6 +112,8 @@ CREATE INDEX "fkIdx_61" ON "point"
     (
      "zone_id"
         );
+INSERT INTO point(id, x, y, zone_id)
+VALUES (1, 1, 1, 1);
 
 CREATE TABLE role
 (
