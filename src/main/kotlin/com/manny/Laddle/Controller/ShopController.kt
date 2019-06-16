@@ -1,6 +1,6 @@
 package com.manny.Laddle.Controller
 
-import com.manny.Laddle.Entities.Shop
+import com.manny.Laddle.Entities.ShopDto
 import com.manny.Laddle.Service.AuthenticationFacadeService
 import com.manny.Laddle.Service.ShopService
 import org.slf4j.LoggerFactory
@@ -18,7 +18,7 @@ class ShopController(
 
     @Secured(ResponseValues.ROLE_ADMIN)
     @PostMapping("")
-    fun add(@RequestBody shop: Shop): ApiResponse {
+    fun add(@RequestBody shop: ShopDto): ApiResponse {
         log.info(
             String.format(
                 "received request to add device %s",
@@ -54,7 +54,7 @@ class ShopController(
 
     @Secured(ResponseValues.ROLE_ADMIN)
     @PutMapping("")
-    fun update(@RequestBody shop: Shop): ApiResponse {
+    fun update(@RequestBody shop: ShopDto): ApiResponse {
         log.info(
             String.format(
                 "received request to update device %s",

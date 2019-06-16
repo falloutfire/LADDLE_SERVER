@@ -1,6 +1,6 @@
 package com.manny.Laddle.Controller
 
-import com.manny.Laddle.Entities.Property
+import com.manny.Laddle.Entities.PropertyDto
 import com.manny.Laddle.Service.AuthenticationFacadeService
 import com.manny.Laddle.Service.PropertyService
 import org.slf4j.LoggerFactory
@@ -18,7 +18,7 @@ class PropertyController(
 
     @Secured(ResponseValues.ROLE_ADMIN)
     @PostMapping("")
-    fun add(@RequestBody property: Property): ApiResponse {
+    fun add(@RequestBody property: PropertyDto): ApiResponse {
         log.info(
             String.format(
                 "received request to add device %s",
@@ -54,7 +54,7 @@ class PropertyController(
 
     @Secured(ResponseValues.ROLE_ADMIN)
     @PutMapping("")
-    fun update(@RequestBody property: Property): ApiResponse {
+    fun update(@RequestBody property: PropertyDto): ApiResponse {
         log.info(
             String.format(
                 "received request to update device %s",

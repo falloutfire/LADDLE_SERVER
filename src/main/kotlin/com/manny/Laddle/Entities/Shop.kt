@@ -12,10 +12,17 @@ class Shop(
     val id: Long,
     @Column(name = "name")
     val name: String,
-    @OneToMany(mappedBy = "shop", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "shop", fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    var listLaddle: List<Laddle>,
+    var laddles: List<Laddle>? = null,
     @OneToMany(mappedBy = "shopId", fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
-    var listUser: List<User>
+    var users: List<User>? = null
+)
+
+class ShopDto(
+    val id: Long,
+    val name: String,
+    var laddles: List<Laddle>? = null,
+    var users: List<User>? = null
 )

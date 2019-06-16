@@ -1,6 +1,6 @@
 package com.manny.Laddle.Controller
 
-import com.manny.Laddle.Entities.Refractory
+import com.manny.Laddle.Entities.RefractoryDto
 import com.manny.Laddle.Service.AuthenticationFacadeService
 import com.manny.Laddle.Service.RefractoryService
 import org.slf4j.LoggerFactory
@@ -18,7 +18,7 @@ class RefractoryController(
 
     @Secured(ResponseValues.ROLE_ADMIN)
     @PostMapping("")
-    fun add(@RequestBody refractory: Refractory): ApiResponse {
+    fun add(@RequestBody refractory: RefractoryDto): ApiResponse {
         log.info(
             String.format(
                 "received request to add device %s",
@@ -54,7 +54,7 @@ class RefractoryController(
 
     @Secured(ResponseValues.ROLE_ADMIN)
     @PutMapping("")
-    fun update(@RequestBody refractory: Refractory): ApiResponse {
+    fun update(@RequestBody refractory: RefractoryDto): ApiResponse {
         log.info(
             String.format(
                 "received request to update device %s",

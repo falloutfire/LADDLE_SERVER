@@ -1,6 +1,8 @@
 package com.manny.Laddle.Entities
 
 import com.fasterxml.jackson.annotation.JsonIgnore
+import org.hibernate.annotations.OnDelete
+import org.hibernate.annotations.OnDeleteAction
 import javax.persistence.*
 
 @Entity
@@ -13,10 +15,19 @@ class Laddle(
     val name: String,
     @Column(name = "photo")
     val photo: ByteArray,
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "shop_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    var shop: Shop?,
+    var shop: Shop,
     @OneToMany(mappedBy = "laddle")
-    var listZone: List<Zone>
+    var zones: List<Zone>? = null
+)
+
+class LaddleDto(
+    val id: Long,
+    val name: String,
+    val photo: ByteArray,
+    var shop: Shop,
+    var zones: List<Zone>? = null
 )

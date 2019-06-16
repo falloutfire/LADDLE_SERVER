@@ -7,7 +7,7 @@ import com.manny.Laddle.Controller.ResponseValues.Companion.NOT_FOUND
 import com.manny.Laddle.Controller.ResponseValues.Companion.ROLE_ADMIN
 import com.manny.Laddle.Controller.ResponseValues.Companion.ROLE_USER
 import com.manny.Laddle.Controller.ResponseValues.Companion.UPDATED
-import com.manny.Laddle.Entities.Laddle
+import com.manny.Laddle.Entities.LaddleDto
 import com.manny.Laddle.Service.AuthenticationFacadeService
 import com.manny.Laddle.Service.LaddleService
 import org.slf4j.LoggerFactory
@@ -26,7 +26,7 @@ class LaddleController(
 
     @Secured(ROLE_ADMIN)
     @PostMapping("")
-    fun add(@RequestBody laddle: Laddle): ApiResponse {
+    fun add(@RequestBody laddle: LaddleDto): ApiResponse {
         log.info(
             String.format(
                 "received request to add device %s",
@@ -62,7 +62,7 @@ class LaddleController(
 
     @Secured(ROLE_ADMIN)
     @PutMapping("")
-    fun update(@RequestBody laddle: Laddle): ApiResponse {
+    fun update(@RequestBody laddle: LaddleDto): ApiResponse {
         log.info(
             String.format(
                 "received request to update device %s",

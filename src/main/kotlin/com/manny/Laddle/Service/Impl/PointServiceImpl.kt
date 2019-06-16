@@ -1,6 +1,7 @@
 package com.manny.Laddle.Service.Impl
 
 import com.manny.Laddle.Entities.Point
+import com.manny.Laddle.Entities.PointDto
 import com.manny.Laddle.Repository.PointRepository
 import com.manny.Laddle.Service.PointService
 import org.springframework.stereotype.Service
@@ -13,30 +14,30 @@ class PointServiceImpl(private val pointRepository: PointRepository) : PointServ
         pointRepository.deleteById(id)
     }
 
-    override fun save(point: Point) {
-        pointRepository.findPointByXAndYAndZoneAndId(point.x, point.y, point.zone!!, point.id).let {
+    override fun save(point: PointDto) {
+        pointRepository.findPointByXAndYAndZoneAndId(point.x, point.y, point.zone, point.id).let {
             if (!it.isPresent) {
-                pointRepository.save(point)
+                pointRepository.save(Point(point.id, point.x, point.y, point.zone))
             }
         }
     }
 
-    override fun all(): List<Point> {
-        return pointRepository.findAll()
+    override fun all(): List<PointDto> {
+        return pointRepository.findAll().map { PointDto(it.id, it.x, it.y, it.zone) }
     }
 
     override fun getById(id: Long): Optional<Point> {
         return pointRepository.findById(id)
     }
 
-    override fun find(point: Point): Optional<Point> {
-        return pointRepository.findPointByXAndYAndZone(point.x, point.y, point.zone!!)
+    override fun find(point: PointDto): Optional<Point> {
+        return pointRepository.findPointByXAndYAndZone(point.x, point.y, point.zone)
     }
 
-    override fun add(point: Point) {
-        pointRepository.findPointByXAndYAndZone(point.x, point.y, point.zone!!).let {
+    override fun add(point: PointDto) {
+        pointRepository.findPointByXAndYAndZone(point.x, point.y, point.zone).let {
             if (!it.isPresent || (point.id != it.get().id)) {
-                pointRepository.save(point)
+                pointRepository.save(Point(point.id, point.x, point.y, point.zone))
             }
         }
     }

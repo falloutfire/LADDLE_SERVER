@@ -1,6 +1,8 @@
 package com.manny.Laddle.Entities
 
 import com.fasterxml.jackson.annotation.JsonIgnore
+import org.hibernate.annotations.OnDelete
+import org.hibernate.annotations.OnDeleteAction
 import javax.persistence.*
 
 @Entity
@@ -15,8 +17,17 @@ class Property(
     val value: String,
     @Column(name = "type")
     val type: String,
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "refractory_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    var refractory: Refractory?
+    var refractory: Refractory
+)
+
+class PropertyDto(
+    val id: Long,
+    val name: String,
+    val value: String,
+    val type: String,
+    var refractory: Refractory
 )

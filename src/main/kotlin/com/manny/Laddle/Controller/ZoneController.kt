@@ -1,8 +1,8 @@
 package com.manny.Laddle.Controller
 
-import com.manny.Laddle.Entities.Laddle
+import com.manny.Laddle.Entities.ZoneDto
 import com.manny.Laddle.Service.AuthenticationFacadeService
-import com.manny.Laddle.Service.LaddleService
+import com.manny.Laddle.Service.ZoneService
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.security.access.annotation.Secured
@@ -11,23 +11,23 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("bd/zone")
 class ZoneController(
-    private val zoneService: LaddleService,
+    private val zoneService: ZoneService,
     private val authenticationFacadeService: AuthenticationFacadeService
 ) {
     private val log = LoggerFactory.getLogger(LaddleController::class.java)
 
     @Secured(ResponseValues.ROLE_ADMIN)
     @PostMapping("")
-    fun add(@RequestBody laddle: Laddle): ApiResponse {
+    fun add(@RequestBody zone: ZoneDto): ApiResponse {
         log.info(
             String.format(
                 "received request to add device %s",
                 authenticationFacadeService.getAuthentication().principal
             )
         )
-        return zoneService.find(laddle).run {
+        return zoneService.find(zone).run {
             if (!isPresent) {
-                zoneService.save(laddle)
+                zoneService.save(zone)
                 ApiResponse(HttpStatus.CREATED, "Laddle ${ResponseValues.CREATED}")
             } else {
                 ApiResponse(HttpStatus.OK, "Laddle ${ResponseValues.EXIST}")
@@ -54,17 +54,17 @@ class ZoneController(
 
     @Secured(ResponseValues.ROLE_ADMIN)
     @PutMapping("")
-    fun update(@RequestBody laddle: Laddle): ApiResponse {
+    fun update(@RequestBody zone: ZoneDto): ApiResponse {
         log.info(
             String.format(
                 "received request to update device %s",
                 authenticationFacadeService.getAuthentication().principal
             )
         )
-        return zoneService.getById(laddle.id)
+        return zoneService.getById(zone.id)
             .run {
                 if (isPresent) {
-                    zoneService.save(laddle)
+                    zoneService.save(zone)
                     ApiResponse(HttpStatus.OK, "Device ${ResponseValues.UPDATED}")
                 } else {
                     ApiResponse(HttpStatus.NOT_FOUND, "Device ${ResponseValues.NOT_FOUND}")
