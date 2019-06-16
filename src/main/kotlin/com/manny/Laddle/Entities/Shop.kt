@@ -26,3 +26,7 @@ class ShopDto(
     var laddles: List<Laddle>? = null,
     var users: List<User>? = null
 )
+
+class ShopId(
+    val id: Long
+)

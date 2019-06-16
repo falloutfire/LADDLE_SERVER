@@ -2,6 +2,8 @@ package com.manny.Laddle.Service.Impl
 
 import com.manny.Laddle.Entities.Laddle
 import com.manny.Laddle.Entities.LaddleDto
+import com.manny.Laddle.Entities.LaddleListEl
+import com.manny.Laddle.Entities.ShopId
 import com.manny.Laddle.Repository.*
 import com.manny.Laddle.Service.LaddleService
 import org.springframework.stereotype.Service
@@ -42,8 +44,12 @@ class LaddleServiceImpl(
         }
     }
 
-    override fun all(): List<LaddleDto> {
-        return laddleRepository.findAll().map { LaddleDto(it.id, it.name, it.photo, it.shop, it.zones) }
+    override fun all(): List<LaddleListEl> {
+
+        return laddleRepository.findAll().map {
+            val shopId: ShopId = ShopId(it.id)
+            LaddleListEl(it.id, it.name, it.photo, shopId, it.zones)
+        }
     }
 
     override fun getById(id: Long): Optional<Laddle> {

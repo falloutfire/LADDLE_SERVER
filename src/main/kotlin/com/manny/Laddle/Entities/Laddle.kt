@@ -31,3 +31,11 @@ class LaddleDto(
     var shop: Shop,
     var zones: List<Zone>? = null
 )
+
+class LaddleListEl(
+    val id: Long,
+    val name: String,
+    val photo: ByteArray,
+    var shop: ShopId,
+    var zones: List<Zone>? = null
+)
