@@ -3,23 +3,26 @@ package com.manny.Laddle.Service.Impl
 import com.manny.Laddle.Entities.Laddle
 import com.manny.Laddle.Entities.LaddleDto
 import com.manny.Laddle.Repository.LaddleRepository
-import com.manny.Laddle.Service.LaddleService
+import com.manny.Laddle.Service.*
 import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
-class LaddleServiceImpl(private val laddleRepository: LaddleRepository) : LaddleService {
+class LaddleServiceImpl(
+    private val laddleRepository: LaddleRepository,
+    private val zoneService: ZoneService,
+    private val pointService: PointService,
+    private val propertyService: PropertyService,
+    private val refractoryService: RefractoryService,
+    private val shopService: ShopService
+
+) : LaddleService {
     override fun delete(id: Long) {
         laddleRepository.deleteById(id)
     }
 
     override fun save(laddle: LaddleDto) {
-        laddleRepository.findLaddleByNameAndShopAndId(laddle.name, laddle.shop, laddle.id).let {
-            if (!it.isPresent) {
-                val laddleIn = Laddle(laddle.id, laddle.name, laddle.photo, laddle.shop/*, laddle.zones*/)
-                laddleRepository.save(laddleIn)
-            }
-        }
+        laddleRepository.saveAndFlush(Laddle(laddle.id, laddle.name, laddle.photo, laddle.shop, laddle.zones))
     }
 
     override fun all(): List<LaddleDto> {
@@ -37,7 +40,7 @@ class LaddleServiceImpl(private val laddleRepository: LaddleRepository) : Laddle
     override fun add(laddle: LaddleDto) {
         laddleRepository.findLaddleByNameAndShop(laddle.name, laddle.shop).let {
             if (!it.isPresent || (laddle.id != it.get().id)) {
-                val laddleIn = Laddle(laddle.id, laddle.name, laddle.photo, laddle.shop/*, laddle.listZone*/)
+                val laddleIn = Laddle(laddle.id, laddle.name, laddle.photo, laddle.shop, laddle.zones)
                 laddleRepository.save(laddleIn)
             }
         }
