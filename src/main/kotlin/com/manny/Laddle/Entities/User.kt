@@ -96,7 +96,7 @@ class UserDto(
             middleName,
             lastName,
             roles,
-            if (shop != null) Shop(shop!!.id, shop!!.name) else null
+            if (shop != null) Shop(shop!!.id, shop!!.name, shop!!.employeesNumber) else null
         )
     }
 

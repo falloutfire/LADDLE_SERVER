@@ -14,11 +14,11 @@ class ShopServiceImpl(private val shopRepository: ShopRepository) : ShopService 
     }
 
     override fun save(shop: ShopDto) {
-        shopRepository.save(Shop(shop.id, shop.name))
+        shopRepository.save(Shop(shop.id, shop.name, shop.employeesNumber))
     }
 
     override fun add(shop: ShopDto) {
-        shopRepository.save(Shop(shop.id, shop.name))
+        shopRepository.save(Shop(shop.id, shop.name, shop.employeesNumber))
         /*shopRepository.findShopByName(shop.name).let {
             if (!it.isPresent || (shop.id != it.get().id)) {
 
@@ -27,7 +27,7 @@ class ShopServiceImpl(private val shopRepository: ShopRepository) : ShopService 
     }
 
     override fun all(): List<ShopDto> {
-        return shopRepository.findAll().map { ShopDto(it.id, it.name) }
+        return shopRepository.findAll().map { ShopDto(it.id, it.name, it.employeesNumber) }
     }
 
     override fun getById(id: Long): Optional<Shop> {

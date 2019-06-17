@@ -13,12 +13,13 @@ CREATE TABLE shop
 (
     "id"   int         NOT NULL,
     "name" varchar(50) NOT NULL,
+    "employees_number" int NOT NULL,
     PRIMARY KEY (id)
 
 );
 
-INSERT INTO shop(id, name)
-VALUES (1, 'Пиздатый цех');
+INSERT INTO shop(id, name, employees_number)
+VALUES (1, 'Пиздатый цех', 100);
 
 
 -- ************************************** "Ladle"

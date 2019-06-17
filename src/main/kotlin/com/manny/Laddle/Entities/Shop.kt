@@ -13,6 +13,8 @@ class Shop(
     val id: Long,
     @Column(name = "name")
     val name: String,
+    @Column(name = "employees_number")
+    val employeesNumber: Int,
     @OneToMany(mappedBy = "shop", fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     var laddles: List<Laddle>? = null,
@@ -22,13 +24,14 @@ class Shop(
 ) : Serializable {
 
     fun toShopDto(): ShopDto {
-        return ShopDto(this.id, this.name)
+        return ShopDto(this.id, this.name, this.employeesNumber)
     }
 }
 
 class ShopDto(
     val id: Long,
-    val name: String
+    val name: String,
+    val employeesNumber: Int
 )
 
 class ShopId(
