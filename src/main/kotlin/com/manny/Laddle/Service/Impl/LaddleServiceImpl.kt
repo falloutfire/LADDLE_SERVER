@@ -25,19 +25,21 @@ class LaddleServiceImpl(
 
     override fun save(laddle: LaddleDto) {
 
-        val ladle = laddleRepository.saveAndFlush(Laddle(laddle.id, laddle.name, laddle.photo, laddle.shop))
+        val ladle = laddleRepository.saveAndFlush(Laddle(laddle.id, laddle.name, laddle.photo, laddle.shop)).id
         for (i in laddle.zones!!) {
-            i.laddle = ladle
+            i.laddle = laddleRepository.findById(ladle).get()
             val zone = zoneRepository.saveAndFlush(i)
+            println("zones p" + zone.points!!.size)
             for (a in zone.points!!) {
-                a.zone = zone
+                a.zone = zoneRepository.findById(zone.id).get()
                 pointRepository.saveAndFlush(a)
             }
+            println("zones r" + zone.refractories!!.size)
             for (a in zone.refractories!!) {
-                a.zone = zone
+                a.zone = zoneRepository.findById(zone.id).get()
                 val ref = refractoryRepository.saveAndFlush(a)
                 for (y in ref.properties!!) {
-                    y.refractory = ref
+                    y.refractory = refractoryRepository.findById(ref.id).get()
                     propertyRepository.saveAndFlush(y)
                 }
             }
@@ -47,7 +49,7 @@ class LaddleServiceImpl(
     override fun all(): List<LaddleListEl> {
 
         return laddleRepository.findAll().map {
-            val shopId: ShopId = ShopId(it.id)
+            val shopId: ShopId = ShopId(it.shop.id)
             LaddleListEl(it.id, it.name, it.photo, shopId, it.zones)
         }
     }
