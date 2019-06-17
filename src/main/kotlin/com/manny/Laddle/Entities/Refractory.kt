@@ -19,6 +19,7 @@ class Refractory(
     @JsonIgnore
     var zone: Zone?,
     @OneToMany(mappedBy = "refractory")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     var properties: List<Property>? = null
 )
 

@@ -14,7 +14,16 @@ class PropertyServiceImpl(private val propertyRepository: PropertyRepository) : 
     }
 
     override fun save(property: PropertyDto) {
-        propertyRepository.findPropertyByNameAndId(property.name, property.id).let {
+        propertyRepository.save(
+            Property(
+                property.id,
+                property.name,
+                property.value,
+                property.type,
+                property.refractory
+            )
+        )
+        /*propertyRepository.findPropertyByNameAndId(property.name, property.id).let {
             if (!it.isPresent) {
                 propertyRepository.save(
                     Property(
@@ -26,7 +35,7 @@ class PropertyServiceImpl(private val propertyRepository: PropertyRepository) : 
                     )
                 )
             }
-        }
+        }*/
     }
 
     override fun all(): List<PropertyDto> {
@@ -42,18 +51,19 @@ class PropertyServiceImpl(private val propertyRepository: PropertyRepository) : 
     }
 
     override fun add(property: PropertyDto) {
-        propertyRepository.findPropertyByName(property.name).let {
+        propertyRepository.save(
+            Property(
+                property.id,
+                property.name,
+                property.value,
+                property.type,
+                property.refractory
+            )
+        )
+        /*propertyRepository.findPropertyByName(property.name).let {
             if (!it.isPresent || (property.id != it.get().id)) {
-                propertyRepository.save(
-                    Property(
-                        property.id,
-                        property.name,
-                        property.value,
-                        property.type,
-                        property.refractory
-                    )
-                )
+
             }
-        }
+        }*/
     }
 }

@@ -15,11 +15,12 @@ class PointServiceImpl(private val pointRepository: PointRepository) : PointServ
     }
 
     override fun save(point: PointDto) {
-        pointRepository.findPointByXAndYAndZoneAndId(point.x, point.y, point.zone, point.id).let {
+        pointRepository.save(Point(point.id, point.x, point.y, point.zone))
+        /*pointRepository.findPointByXAndYAndZoneAndId(point.x, point.y, point.zone, point.id).let {
             if (!it.isPresent) {
-                pointRepository.save(Point(point.id, point.x, point.y, point.zone))
+
             }
-        }
+        }*/
     }
 
     override fun all(): List<PointDto> {
@@ -35,10 +36,11 @@ class PointServiceImpl(private val pointRepository: PointRepository) : PointServ
     }
 
     override fun add(point: PointDto) {
-        pointRepository.findPointByXAndYAndZone(point.x, point.y, point.zone).let {
+        pointRepository.save(Point(point.id, point.x, point.y, point.zone))
+        /*pointRepository.findPointByXAndYAndZone(point.x, point.y, point.zone).let {
             if (!it.isPresent || (point.id != it.get().id)) {
-                pointRepository.save(Point(point.id, point.x, point.y, point.zone))
+
             }
-        }
+        }*/
     }
 }

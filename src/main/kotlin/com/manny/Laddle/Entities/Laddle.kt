@@ -22,6 +22,7 @@ class Laddle(
     @JsonIgnore
     var shop: Shop,
     @OneToMany(mappedBy = "laddle")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     var zones: List<Zone>? = null
 )
 

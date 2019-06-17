@@ -86,6 +86,7 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
         web.ignoring().antMatchers(HttpMethod.OPTIONS)
     }
 
+
     @Bean
     fun tokenStore(): TokenStore {
         return CustomJdbcTokenStore(jdbcTemplate!!.dataSource!!)
@@ -118,7 +119,6 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
         bean.order = Ordered.HIGHEST_PRECEDENCE
         return bean
     }
-
 
 }
 

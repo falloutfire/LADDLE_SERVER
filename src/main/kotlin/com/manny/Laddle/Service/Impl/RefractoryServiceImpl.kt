@@ -14,11 +14,7 @@ class RefractoryServiceImpl(private val refractoryRepository: RefractoryReposito
     }
 
     override fun save(refractory: RefractoryDto) {
-        refractoryRepository.findRefractoryByNameAndId(refractory.name, refractory.id).let {
-            if (!it.isPresent && refractory.id == it.get().id) {
-                refractoryRepository.save(Refractory(refractory.id, refractory.name, refractory.zone))
-            }
-        }
+        refractoryRepository.save(Refractory(refractory.id, refractory.name, refractory.zone))
     }
 
     override fun all(): List<RefractoryDto> {
@@ -34,10 +30,6 @@ class RefractoryServiceImpl(private val refractoryRepository: RefractoryReposito
     }
 
     override fun add(refractory: RefractoryDto) {
-        refractoryRepository.findRefractoryByName(refractory.name).let {
-            if (!it.isPresent || (refractory.id != it.get().id)) {
-                refractoryRepository.save(Refractory(refractory.id, refractory.name, refractory.zone))
-            }
-        }
+        refractoryRepository.save(Refractory(refractory.id, refractory.name, refractory.zone))
     }
 }

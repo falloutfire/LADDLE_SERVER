@@ -1,5 +1,7 @@
 package com.manny.Laddle.Controller
 
+import com.manny.Laddle.Controller.ResponseValues.Companion.ROLE_ADMIN
+import com.manny.Laddle.Controller.ResponseValues.Companion.ROLE_USER
 import com.manny.Laddle.Entities.ZoneDto
 import com.manny.Laddle.Service.AuthenticationFacadeService
 import com.manny.Laddle.Service.ZoneService
@@ -16,7 +18,7 @@ class ZoneController(
 ) {
     private val log = LoggerFactory.getLogger(LaddleController::class.java)
 
-    @Secured(ResponseValues.ROLE_ADMIN)
+    @Secured(ROLE_ADMIN)
     @PostMapping("")
     fun add(@RequestBody zone: ZoneDto): ApiResponse {
         log.info(
@@ -35,7 +37,7 @@ class ZoneController(
         }
     }
 
-    @Secured(ResponseValues.ROLE_ADMIN)
+    @Secured(ROLE_ADMIN)
     @DeleteMapping("/{id}")
     fun delete(@PathVariable(value = "id") id: Long): ApiResponse {
         log.info(
@@ -52,7 +54,7 @@ class ZoneController(
         }
     }
 
-    @Secured(ResponseValues.ROLE_ADMIN)
+    @Secured(ROLE_ADMIN)
     @PutMapping("")
     fun update(@RequestBody zone: ZoneDto): ApiResponse {
         log.info(
@@ -72,7 +74,7 @@ class ZoneController(
             }
     }
 
-    @Secured(ResponseValues.ROLE_ADMIN, ResponseValues.ROLE_USER)
+    @Secured(ROLE_ADMIN, ROLE_USER)
     @GetMapping("")
     fun all(): ApiResponse {
         log.info(
@@ -86,7 +88,7 @@ class ZoneController(
         }
     }
 
-    @Secured(ResponseValues.ROLE_ADMIN, ResponseValues.ROLE_USER)
+    @Secured(ROLE_ADMIN, ROLE_USER)
     @GetMapping("/{id}")
     fun getById(@PathVariable(value = "id") id: Long): ApiResponse {
         log.info(
