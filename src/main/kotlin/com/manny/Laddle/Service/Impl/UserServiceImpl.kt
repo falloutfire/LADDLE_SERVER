@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service
 
 @Component
 @Service("userService")
-class UserDetailsService : UserDetailsService, UserService {
+class AppUserDetailsService : UserDetailsService, UserService {
 
     @Autowired
     private val userRepository: UserRepository? = null
@@ -37,7 +37,11 @@ class UserDetailsService : UserDetailsService, UserService {
             log.error(String.format("Duplicate username ", user.username))
             throw RuntimeException("Duplicate username.")
         }
-
+        /*val userWithDuplicateEmail = userRepository.findByEmail(user.email!!)
+        if (userWithDuplicateEmail.isPresent && user.id != userWithDuplicateEmail.get().id) {
+            log.error(String.format("Duplicate email ", user.email))
+            throw RuntimeException("Duplicate email.")
+        }*/
         user.password = passwordEncoder!!.encode(user.password!!)
         val roleTypes = ArrayList<Role>()
         user.roles!!.stream().map { role ->
@@ -77,7 +81,7 @@ class UserDetailsService : UserDetailsService, UserService {
 
     companion object {
 
-        private val log = LoggerFactory.getLogger(UserDetailsService::class.java)
+        private val log = LoggerFactory.getLogger(UserService::class.java)
     }
 }
 
@@ -89,7 +93,7 @@ class RoleServiceImpl : RoleService {
     private val roleRepository: RoleRepository? = null
 
     override fun findAllRole(): List<Role> {
-        return roleRepository?.findAll() as List<Role>
+        return roleRepository?.findAll()!!
     }
 
 }

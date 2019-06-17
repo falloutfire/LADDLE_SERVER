@@ -86,6 +86,7 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
         web.ignoring().antMatchers(HttpMethod.OPTIONS)
     }
 
+
     @Bean
     fun tokenStore(): TokenStore {
         return CustomJdbcTokenStore(jdbcTemplate!!.dataSource!!)
