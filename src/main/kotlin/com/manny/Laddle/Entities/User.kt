@@ -37,7 +37,7 @@ class User(
     var roles: List<Role>? = null,
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shop_id", nullable = false)
-    var shopId: Shop?
+    var shop_id: Shop?
 )
 
 class UserDto(
@@ -59,7 +59,7 @@ class UserDto(
                 user.middleName,
                 user.lastName,
                 user.roles,
-                user.shopId
+                user.shop_id
             )
         }
     }
