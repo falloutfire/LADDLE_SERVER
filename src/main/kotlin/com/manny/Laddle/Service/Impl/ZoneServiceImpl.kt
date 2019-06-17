@@ -11,11 +11,12 @@ import java.util.*
 class ZoneServiceImpl(private val zoneRepository: ZoneRepository) : ZoneService {
 
     override fun save(zone: ZoneDto) {
-        zoneRepository.findZoneByNameAndId(zone.name, zone.id).let {
+        zoneRepository.save(Zone(zone.id, zone.name, zone.laddle))
+        /*zoneRepository.findZoneByNameAndId(zone.name, zone.id).let {
             if (it.isPresent) {
-                zoneRepository.save(Zone(zone.id, zone.name, zone.laddle))
+
             }
-        }
+        }*/
     }
 
     override fun delete(id: Long) {
@@ -23,11 +24,12 @@ class ZoneServiceImpl(private val zoneRepository: ZoneRepository) : ZoneService 
     }
 
     override fun add(zone: ZoneDto) {
-        zoneRepository.findZoneByName(zone.name).let {
+        zoneRepository.save(Zone(zone.id, zone.name, zone.laddle))
+        /*zoneRepository.findZoneByName(zone.name).let {
             if (!it.isPresent || (zone.id != it.get().id)) {
-                zoneRepository.save(Zone(zone.id, zone.name, zone.laddle))
+
             }
-        }
+        }*/
     }
 
     override fun all(): List<ZoneDto> {

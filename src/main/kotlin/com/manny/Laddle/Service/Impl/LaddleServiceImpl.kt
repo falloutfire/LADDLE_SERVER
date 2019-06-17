@@ -63,11 +63,12 @@ class LaddleServiceImpl(
     }
 
     override fun add(laddle: LaddleDto) {
-        laddleRepository.findLaddleByNameAndShop(laddle.name, laddle.shop).let {
+        val laddleIn = Laddle(laddle.id, laddle.name, laddle.photo, laddle.shop, laddle.zones)
+        laddleRepository.save(laddleIn)
+        /*laddleRepository.findLaddleByNameAndShop(laddle.name, laddle.shop).let {
             if (!it.isPresent || (laddle.id != it.get().id)) {
-                val laddleIn = Laddle(laddle.id, laddle.name, laddle.photo, laddle.shop, laddle.zones)
-                laddleRepository.save(laddleIn)
+
             }
-        }
+        }*/
     }
 }
