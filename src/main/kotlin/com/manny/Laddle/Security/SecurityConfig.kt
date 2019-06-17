@@ -120,7 +120,6 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
         return bean
     }
 
-
 }
 
 
