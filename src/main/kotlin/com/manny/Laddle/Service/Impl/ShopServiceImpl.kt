@@ -30,7 +30,7 @@ class ShopServiceImpl(private val shopRepository: ShopRepository) : ShopService 
     }
 
     override fun all(): List<ShopDto> {
-        return shopRepository.findAll().map { ShopDto(it.id, it.name, it.laddles, it.users) }
+        return shopRepository.findAll().map { ShopDto(it.id, it.name) }
     }
 
     override fun getById(id: Long): Optional<Shop> {

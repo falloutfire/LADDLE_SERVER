@@ -32,13 +32,13 @@ class UserDetailsService : UserDetailsService, UserService {
     private val passwordEncoder: BCryptPasswordEncoder? = null
 
     override fun saveUser(user: User) {
-        val userWithDuplicateUsername = userRepository!!.findByUsername(user.username!!)
+        val userWithDuplicateUsername = userRepository!!.findByUserName(user.username!!)
         if (userWithDuplicateUsername.isPresent && user.id != userWithDuplicateUsername.get().id) {
             log.error(String.format("Duplicate username ", user.username))
             throw RuntimeException("Duplicate username.")
         }
 
-        user.password = passwordEncoder!!.encode(user.password!!)
+        user.userPassword = passwordEncoder!!.encode(user.password!!)
         val roleTypes = ArrayList<Role>()
         user.roles!!.stream().map { role ->
             roleRepository?.findRoleById(role.id!!).let {
@@ -66,13 +66,9 @@ class UserDetailsService : UserDetailsService, UserService {
 
     @Throws(UsernameNotFoundException::class)
     override fun loadUserByUsername(s: String): UserDetails {
-        val user = userRepository?.findByUsername(s)
+        val user = userRepository?.findByUserName(s)
             ?: throw UsernameNotFoundException(String.format("The username %s doesn't exist", s))
-
-        val authorities = ArrayList<GrantedAuthority>()
-        user.get().roles?.forEach { role -> authorities.add(SimpleGrantedAuthority(role.roleName)) }
-
-        return org.springframework.security.core.userdetails.User(user.get().username, user.get().password, authorities)
+        return user.get()
     }
 
     companion object {

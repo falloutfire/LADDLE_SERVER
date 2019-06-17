@@ -9,7 +9,7 @@ import org.springframework.security.access.annotation.Secured
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("bd/shop")
+@RequestMapping("bd/shops")
 class ShopController(
     private val shopService: ShopService,
     private val authenticationFacadeService: AuthenticationFacadeService

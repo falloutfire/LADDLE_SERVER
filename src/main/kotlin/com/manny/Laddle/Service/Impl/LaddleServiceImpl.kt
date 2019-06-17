@@ -25,7 +25,7 @@ class LaddleServiceImpl(
 
     override fun save(laddle: LaddleDto) {
 
-        val ladle = laddleRepository.saveAndFlush(Laddle(laddle.id, laddle.name, laddle.photo, laddle.shop))
+        val ladle = laddleRepository.saveAndFlush(Laddle(laddle.id, laddle.name, laddle.photo, laddle.shop!!))
         for (i in laddle.zones!!) {
             i.laddle = ladle
             val zone = zoneRepository.saveAndFlush(i)
@@ -57,13 +57,13 @@ class LaddleServiceImpl(
     }
 
     override fun find(laddle: LaddleDto): Optional<Laddle> {
-        return laddleRepository.findLaddleByNameAndShop(laddle.name, laddle.shop)
+        return laddleRepository.findLaddleByNameAndShop(laddle.name, laddle.shop!!)
     }
 
     override fun add(laddle: LaddleDto) {
-        laddleRepository.findLaddleByNameAndShop(laddle.name, laddle.shop).let {
+        laddleRepository.findLaddleByNameAndShop(laddle.name, laddle.shop!!).let {
             if (!it.isPresent || (laddle.id != it.get().id)) {
-                val laddleIn = Laddle(laddle.id, laddle.name, laddle.photo, laddle.shop, laddle.zones)
+                val laddleIn = Laddle(laddle.id, laddle.name, laddle.photo, laddle.shop!!, laddle.zones)
                 laddleRepository.save(laddleIn)
             }
         }

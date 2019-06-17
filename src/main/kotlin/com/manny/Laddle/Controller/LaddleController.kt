@@ -8,12 +8,17 @@ import com.manny.Laddle.Controller.ResponseValues.Companion.ROLE_ADMIN
 import com.manny.Laddle.Controller.ResponseValues.Companion.ROLE_USER
 import com.manny.Laddle.Controller.ResponseValues.Companion.UPDATED
 import com.manny.Laddle.Entities.LaddleDto
+import com.manny.Laddle.Entities.User
 import com.manny.Laddle.Service.AuthenticationFacadeService
 import com.manny.Laddle.Service.LaddleService
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.security.access.annotation.Secured
 import org.springframework.web.bind.annotation.*
+import org.springframework.security.core.userdetails.UserDetails
+import org.springframework.security.core.context.SecurityContextHolder
+
+
 
 @RestController
 @RequestMapping("bd/laddle")
@@ -33,6 +38,7 @@ class LaddleController(
                 authenticationFacadeService.getAuthentication().principal
             )
         )
+        laddle.shop = (SecurityContextHolder.getContext().authentication.principal as User).shop!!
         return laddleService.find(laddle).run {
             if (!isPresent) {
                 laddleService.save(laddle)

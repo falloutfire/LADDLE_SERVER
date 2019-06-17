@@ -1,10 +1,11 @@
 package com.manny.Laddle.Entities
 
+import java.io.Serializable
 import javax.persistence.*
 
 @Entity
 @Table(name = "role")
-class Role {
+class Role : Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

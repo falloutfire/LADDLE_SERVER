@@ -3,6 +3,7 @@ package com.manny.Laddle.Entities
 import com.fasterxml.jackson.annotation.JsonIgnore
 import org.hibernate.annotations.OnDelete
 import org.hibernate.annotations.OnDeleteAction
+import org.springframework.security.core.context.SecurityContextHolder
 import javax.persistence.*
 
 @Entity
@@ -28,7 +29,7 @@ class LaddleDto(
     val id: Long,
     val name: String,
     val photo: ByteArray,
-    var shop: Shop,
+    var shop: Shop?,
     var zones: List<Zone>? = null
 )
 

@@ -1,6 +1,9 @@
 package com.manny.Laddle.Entities
 
 import com.fasterxml.jackson.annotation.JsonIgnore
+import org.springframework.security.core.GrantedAuthority
+import org.springframework.security.core.authority.SimpleGrantedAuthority
+import org.springframework.security.core.userdetails.UserDetails
 import javax.persistence.*
 
 @Entity
@@ -11,10 +14,10 @@ class User(
     var id: Long? = null,
 
     @Column(name = "username")
-    var username: String? = null,
+    var userName: String? = null,
 
     @Column(name = "password")
-    var password: String? = null,
+    var userPassword: String? = null,
 
     @Column(name = "first_name")
     var firstName: String? = null,
@@ -39,8 +42,39 @@ class User(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shop_id", nullable = false)
     @JsonIgnore
-    var shopId: Shop?
-)
+    var shop: Shop?
+) : UserDetails {
+
+    override fun getAuthorities(): Collection<GrantedAuthority> {
+        return ArrayList<GrantedAuthority>().also {
+            it.addAll(this.roles!!.map { role -> SimpleGrantedAuthority(role.roleName) })
+        }
+    }
+
+    override fun isEnabled(): Boolean {
+        return true
+    }
+
+    override fun getUsername(): String {
+        return this.userName!!
+    }
+
+    override fun isCredentialsNonExpired(): Boolean {
+        return true
+    }
+
+    override fun getPassword(): String {
+        return this.userPassword!!
+    }
+
+    override fun isAccountNonExpired(): Boolean {
+        return true
+    }
+
+    override fun isAccountNonLocked(): Boolean {
+        return true
+    }
+}
 
 class UserDto(
     var id: Long? = null,
@@ -49,8 +83,22 @@ class UserDto(
     var middleName: String? = null,
     var lastName: String? = null,
     var roles: List<Role>? = null,
-    var shopId: Shop? = null
+    var password: String? = null,
+    var shop: ShopDto? = null
 ) {
+
+    fun toUser(): User {
+        return User(
+            id,
+            login,
+            password,
+            firstName,
+            middleName,
+            lastName,
+            roles,
+            if (shop != null) Shop(shop!!.id, shop!!.name) else null
+        )
+    }
 
     companion object {
         fun toUserDto(user: User): UserDto {
@@ -61,7 +109,8 @@ class UserDto(
                 user.middleName,
                 user.lastName,
                 user.roles,
-                user.shopId
+                user.password,
+                if (user.shop != null) user.shop!!.toShopDto() else null
             )
         }
     }

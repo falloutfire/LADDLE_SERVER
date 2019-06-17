@@ -2,6 +2,7 @@ package com.manny.Laddle.Entities
 
 import org.hibernate.annotations.OnDelete
 import org.hibernate.annotations.OnDeleteAction
+import java.io.Serializable
 import javax.persistence.*
 
 @Entity
@@ -15,16 +16,19 @@ class Shop(
     @OneToMany(mappedBy = "shop", fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     var laddles: List<Laddle>? = null,
-    @OneToMany(mappedBy = "shopId", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "shop", fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     var users: List<User>? = null
-)
+) : Serializable {
+
+    fun toShopDto(): ShopDto {
+        return ShopDto(this.id, this.name)
+    }
+}
 
 class ShopDto(
     val id: Long,
-    val name: String,
-    var laddles: List<Laddle>? = null,
-    var users: List<User>? = null
+    val name: String
 )
 
 class ShopId(
