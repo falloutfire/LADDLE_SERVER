@@ -90,6 +90,11 @@ create table point
             references zone
 );
 
+
+drop table if exists user_role CASCADE;
+drop table if exists role CASCADE;
+drop table if exists users CASCADE;
+
 create table role
 (
     id          bigserial not null
@@ -99,9 +104,6 @@ create table role
     role_name   varchar(255)
 );
 
-drop table if exists user_role CASCADE;
-drop table if exists role CASCADE;
-drop table if exists users CASCADE;
 
 create table users
 (
