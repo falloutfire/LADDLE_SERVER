@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.*
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.context.SecurityContextHolder
 
-
-
 @RestController
 @RequestMapping("bd/ladles")
 class LaddleController(
