@@ -36,7 +36,7 @@ class LaddleController(
                 authenticationFacadeService.getAuthentication().principal
             )
         )
-        laddle.shop = (SecurityContextHolder.getContext().authentication.principal as User).shop!!
+        //laddle.shop = (SecurityContextHolder.getContext().authentication.principal as User).shop!!
         return laddleService.find(laddle).run {
             if (!isPresent) {
                 laddleService.save(laddle)
