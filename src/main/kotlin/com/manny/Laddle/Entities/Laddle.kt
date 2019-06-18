@@ -20,7 +20,7 @@ class Laddle(
     @JoinColumn(name = "shop_id", nullable = false)
     @JsonIgnore
     var shop: Shop,
-    @OneToMany(mappedBy = "laddle", cascade = [CascadeType.REMOVE], orphanRemoval = true)
+    @OneToMany(mappedBy = "laddle", cascade = [CascadeType.REMOVE])
     var zones: List<Zone>? = null
 )
 
