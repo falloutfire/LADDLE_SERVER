@@ -319,12 +319,22 @@ INSERT INTO users (id, first_name, last_name, middle_name, username, password, s
 VALUES (57, 'Артем', 'Артемьев ', 'Юрьевич', 'artem', '$2a$10$lkl23LceLpcv0WyDZ2b7ZuJkdbcdP80RtpIdSp4U6fAAjOLLnRtw2',
         4);
 
-INSERT INTO user_role(user_id, role_id)
-VALUES (1, 1);
-INSERT INTO user_role(user_id, role_id)
+INSERT INTO public.user_role (user_id, role_id)
 VALUES (2, 1);
-INSERT INTO user_role(user_id, role_id)
+INSERT INTO public.user_role (user_id, role_id)
 VALUES (2, 2);
+INSERT INTO public.user_role (user_id, role_id)
+VALUES (1, 1);
+INSERT INTO public.user_role (user_id, role_id)
+VALUES (52, 1);
+INSERT INTO public.user_role (user_id, role_id)
+VALUES (55, 1);
+INSERT INTO public.user_role (user_id, role_id)
+VALUES (55, 2);
+INSERT INTO public.user_role (user_id, role_id)
+VALUES (56, 1);
+INSERT INTO public.user_role (user_id, role_id)
+VALUES (57, 1);
 
 INSERT INTO oauth_client_details
 (client_id, client_secret, scope, authorized_grant_types,
