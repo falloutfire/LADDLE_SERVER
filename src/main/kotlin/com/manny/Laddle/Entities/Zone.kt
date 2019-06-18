@@ -18,11 +18,9 @@ class Zone(
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     var laddle: Laddle?,
-    @OneToMany(mappedBy = "zone")
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToMany(mappedBy = "zone", cascade = [CascadeType.REMOVE], orphanRemoval = true)
     var points: List<Point>? = null,
-    @OneToMany(mappedBy = "zone")
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToMany(mappedBy = "zone", cascade = [CascadeType.REMOVE], orphanRemoval = true)
     var refractories: List<Refractory>? = null
 )
 

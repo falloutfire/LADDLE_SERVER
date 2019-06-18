@@ -133,8 +133,8 @@ CREATE TABLE users
     middle_name varchar(255) NOT NULL,
     password    varchar(255) NOT NULL,
     username    varchar(255) NOT NULL,
-    shop_id     bigint       NOT NULL,
-    CONSTRAINT "FK_22" FOREIGN KEY ("shop_id") REFERENCES "shop" ("id"),
+    shop_id     bigint,
+    CONSTRAINT "FK_22" FOREIGN KEY ("shop_id") REFERENCES "shop" ("id") ON DELETE SET NULL,
     PRIMARY KEY (id)
 );
 CREATE INDEX "fkIdx_22" ON "users"

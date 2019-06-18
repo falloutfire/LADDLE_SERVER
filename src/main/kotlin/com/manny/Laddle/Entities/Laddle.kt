@@ -16,13 +16,11 @@ class Laddle(
     val name: String,
     @Column(name = "photo")
     val photo: ByteArray,
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = [CascadeType.REMOVE])
     @JoinColumn(name = "shop_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     var shop: Shop,
-    @OneToMany(mappedBy = "laddle")
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToMany(mappedBy = "laddle", cascade = [CascadeType.REMOVE], orphanRemoval = true)
     var zones: List<Zone>? = null
 )
 
