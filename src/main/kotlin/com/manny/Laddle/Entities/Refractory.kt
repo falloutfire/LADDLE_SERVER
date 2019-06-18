@@ -17,7 +17,7 @@ class Refractory(
     @JoinColumn(name = "zone_id", nullable = false)
     @JsonIgnore
     var zone: Zone?,
-    @OneToMany(mappedBy = "refractory", cascade = [CascadeType.REMOVE], orphanRemoval = true)
+    @OneToMany(mappedBy = "refractory", cascade = [CascadeType.REMOVE])
     var properties: List<Property>? = null
 )
 

@@ -16,7 +16,7 @@ class Shop(
     val name: String,
     @Column(name = "employees_number")
     val employeesNumber: Int,
-    @OneToMany(mappedBy = "shop", fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE], orphanRemoval = true)
+    @OneToMany(mappedBy = "shop", fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE])
     var laddles: List<Laddle>? = null,
     @OneToMany(mappedBy = "shop", fetch = FetchType.LAZY, cascade = [CascadeType.DETACH])
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
