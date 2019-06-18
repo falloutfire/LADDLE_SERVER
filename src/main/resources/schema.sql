@@ -145,9 +145,9 @@ VALUES (2, 'ROLE_ADMIN', 'Admin User - Has permission to perform admin tasks');
 -- USER
 -- non-encrypted password: jwtpass
 INSERT INTO users (id, first_name, last_name, password, username, middle_name, shop_id)
-VALUES (1, 'Ilya', 'Man', '$2a$04$Cba8DVPiJDqJMTYVsGQmpuEnW4nVcfNke/d9XG0EOKPXyHZfbqXTC', 'user', 'Сергеич', 1);
+VALUES (1, 'Ilya', 'Man', '$2a$04$Cba8DVPiJDqJMTYVsGQmpuEnW4nVcfNke/d9XG0EOKPXyHZfbqXTC', 'user', '_', 1);
 INSERT INTO users (id, first_name, last_name, password, username, middle_name, shop_id)
-VALUES (2, 'Admin', 'Admin', '$2a$04$EZzbSqieYfe/nFWfBWt2KeCdyq0UuDEM1ycFF8HzmlVR6sbsOnw7u', 'admin', 'Валерыч', 1);
+VALUES (2, 'Admin', 'Admin', '$2a$04$EZzbSqieYfe/nFWfBWt2KeCdyq0UuDEM1ycFF8HzmlVR6sbsOnw7u', 'admin', '_', 1);
 
 
 INSERT INTO user_role(user_id, role_id)
