@@ -1,154 +1,140 @@
-DROP TABLE IF EXISTS "point" CASCADE;
-DROP TABLE IF EXISTS "laddle" CASCADE;
-DROP TABLE IF EXISTS "property" CASCADE;
-DROP TABLE IF EXISTS "refractory" CASCADE;
-DROP TABLE IF EXISTS "shop" CASCADE;
-DROP TABLE IF EXISTS "zone" CASCADE;
+DROP TABLE IF EXISTS point CASCADE;
+DROP TABLE IF EXISTS laddle CASCADE;
+DROP TABLE IF EXISTS property CASCADE;
+DROP TABLE IF EXISTS refractory CASCADE;
+DROP TABLE IF EXISTS shop CASCADE;
+DROP TABLE IF EXISTS zone CASCADE;
 
 drop table if exists user_role CASCADE;
 drop table if exists role CASCADE;
 drop table if exists users CASCADE;
 
-CREATE TABLE shop
+create table shop
 (
-    "id"   int         NOT NULL,
-    "name" varchar(50) NOT NULL,
-    "employees_number" int NOT NULL,
-    PRIMARY KEY (id)
-
+    id               bigint not null
+        constraint shop_pkey
+            primary key,
+    employees_number integer,
+    name             varchar(255)
 );
 
 INSERT INTO shop(id, name, employees_number)
-VALUES (1, 'Пиздатый цех', 100);
+VALUES (1, 'Цех номер 1', 100);
 
 
 -- ************************************** "Ladle"
 
-CREATE TABLE "laddle"
+create table laddle
 (
-    "id"      int         NOT NULL,
-    "name"    varchar(50) NOT NULL,
-    "photo"   bytea       NOT NULL,
-    "shop_id" int         NOT NULL,
-    CONSTRAINT "FK_29" FOREIGN KEY ("shop_id") REFERENCES "shop" ("id"),
-    PRIMARY KEY (id)
+    id      bigint not null
+        constraint laddle_pkey
+            primary key,
+    name    varchar(255),
+    photo   bytea,
+    shop_id bigint not null
+        constraint fkenejp0s83ufpfixrdwy55cdbi
+            references shop
 );
-
-CREATE INDEX "fkIdx_29" ON "laddle"
-    (
-     "shop_id"
-        );
 
 INSERT INTO laddle(id, name, photo, shop_id)
-VALUES (1, 'Пиздатый ladle', '1', 1);
+VALUES (1, 'Ковш 1', '1', 1);
 
-CREATE TABLE "zone"
+create table zone
 (
-    "id"        int         NOT NULL,
-    "name"      varchar(50) NOT NULL,
-    "laddle_id" int         NOT NULL,
-    CONSTRAINT "FK_37" FOREIGN KEY ("laddle_id") REFERENCES "laddle" ("id"),
-    PRIMARY KEY (id)
+    id        bigint not null
+        constraint zone_pkey
+            primary key,
+    name      varchar(255),
+    laddle_id bigint not null
+        constraint fk70pqwyx7m4uie64wul8m8sn6r
+            references laddle
 );
-
-CREATE INDEX "fkIdx_37" ON "zone"
-    (
-     "laddle_id"
-        );
 
 INSERT INTO zone(id, name, laddle_id)
-VALUES (1, 'Пиздатый zone', 1);
+VALUES (1, 'Зона 1', 1);
 -- ************************************** "Refractory"
 
-CREATE TABLE "refractory"
+create table refractory
 (
-    "id"      int         NOT NULL,
-    "name"    varchar(50) NOT NULL,
-    "zone_id" int         NOT NULL,
-    CONSTRAINT "FK_44" FOREIGN KEY ("zone_id") REFERENCES "zone" ("id"),
-    PRIMARY KEY (id)
+    id      bigint not null
+        constraint refractory_pkey
+            primary key,
+    name    varchar(255),
+    zone_id bigint not null
+        constraint fkpw1wys9pfjqw19id8wwh57kgq
+            references zone
 );
-
-
-CREATE INDEX "fkIdx_44" ON "refractory"
-    (
-     "zone_id"
-        );
 
 INSERT INTO refractory(id, name, zone_id)
-VALUES (1, 'Пиздатый refractory', 1);
+VALUES (1, 'Огнеупор', 1);
 -- ************************************** "Property"
 
-CREATE TABLE "property"
+create table property
 (
-    "id"            int         NOT NULL,
-    "name"          varchar(50) NOT NULL,
-    "value"         varchar(50) NOT NULL,
-    "type"          varchar(10) NOT NULL,
-    "refractory_id" int         NOT NULL,
-    CONSTRAINT "FK_53" FOREIGN KEY ("refractory_id") REFERENCES "refractory" ("id"),
-    PRIMARY KEY (id)
+    id            bigint not null
+        constraint property_pkey
+            primary key,
+    name          varchar(255),
+    type          varchar(255),
+    value         varchar(255),
+    refractory_id bigint not null
+        constraint fkjfyll53w6wir63d59x7qbaovd
+            references refractory
 );
-
-CREATE INDEX "fkIdx_53" ON "property"
-    (
-     "refractory_id"
-        );
 
 INSERT INTO property(id, name, value, refractory_id, type)
-VALUES (1, 'Пиздатый property', 1, 1, 'type');
+VALUES (1, 'Свойство', 1, 1, 'Тип');
 -- ************************************** "Point"
 
-CREATE TABLE "point"
+create table point
 (
-    "id"      int NOT NULL,
-    "x"       int NOT NULL,
-    "y"       int NOT NULL,
-    "zone_id" int NOT NULL,
-    CONSTRAINT "FK_61" FOREIGN KEY ("zone_id") REFERENCES "zone" ("id"),
-    PRIMARY KEY (id)
+    id      bigint not null
+        constraint point_pkey
+            primary key,
+    x       integer,
+    y       integer,
+    zone_id bigint not null
+        constraint fk5nh147hk25f3fxt8n9187qowy
+            references zone
 );
 
-CREATE INDEX "fkIdx_61" ON "point"
-    (
-     "zone_id"
-        );
 INSERT INTO point(id, x, y, zone_id)
 VALUES (1, 1, 1, 1);
 
-CREATE TABLE role
+
+create table role
 (
-    id          bigint NOT NULL,
-    description varchar(255) DEFAULT NULL,
-    role_name   varchar(255) DEFAULT NULL,
-    PRIMARY KEY (id)
+    id          bigserial not null
+        constraint role_pkey
+            primary key,
+    description varchar(255),
+    role_name   varchar(255)
 );
 
 
-CREATE TABLE users
+create table users
 (
-    id          bigint       NOT NULL,
-    first_name  varchar(255) NOT NULL,
-    last_name   varchar(255) NOT NULL,
-    middle_name varchar(255) NOT NULL,
-    password    varchar(255) NOT NULL,
-    username    varchar(255) NOT NULL,
-    shop_id     bigint,
-    CONSTRAINT "FK_22" FOREIGN KEY ("shop_id") REFERENCES "shop" ("id") ON DELETE SET NULL,
-    PRIMARY KEY (id)
+    id          bigint not null
+        constraint users_pkey
+            primary key,
+    first_name  varchar(255),
+    last_name   varchar(255),
+    middle_name varchar(255),
+    username    varchar(255),
+    password    varchar(255),
+    shop_id     bigint
+        constraint fkfesbkulej4bo8neiy68turcbo
+            references shop
 );
-CREATE INDEX "fkIdx_22" ON "users"
-    (
-     "shop_id"
-        );
 
-
-CREATE TABLE user_role
+create table user_role
 (
-    user_id bigint NOT NULL,
-    role_id bigint NOT NULL,
-    CONSTRAINT FK859n2jvi8ivhui0rl0esws6o FOREIGN KEY (user_id) REFERENCES users (id),
-    CONSTRAINT FKa68196081fvovjhkek5m97n3y FOREIGN KEY (role_id) REFERENCES role (id)
+    user_id bigint not null
+        constraint fkj345gk1bovqvfame88rcx7yyx
+            references users,
+    role_id bigint not null
+        constraint fka68196081fvovjhkek5m97n3y
+            references role
 );
 
 INSERT INTO role (id, role_name, description)
@@ -256,7 +242,6 @@ create table ClientDetails
     additionalInformation  VARCHAR(4096),
     autoApproveScopes      VARCHAR(255)
 );
-
 
 -- insert client details
 INSERT INTO oauth_client_details
