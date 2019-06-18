@@ -13,6 +13,8 @@ class Refractory(
     val id: Long,
     @Column(name = "name")
     val name: String,
+    @Column(name = "characteristic")
+    val characteristic: String,
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "zone_id", nullable = false)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
@@ -26,5 +28,6 @@ class RefractoryDto(
     val id: Long,
     val name: String,
     var zone: Zone?,
+    var characteristic: String,
     var properties: List<Property>? = null
 )

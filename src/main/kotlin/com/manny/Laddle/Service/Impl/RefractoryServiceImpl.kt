@@ -14,11 +14,19 @@ class RefractoryServiceImpl(private val refractoryRepository: RefractoryReposito
     }
 
     override fun save(refractory: RefractoryDto) {
-        refractoryRepository.save(Refractory(refractory.id, refractory.name, refractory.zone))
+        refractoryRepository.save(
+            Refractory(
+                refractory.id,
+                refractory.name,
+                refractory.characteristic,
+                refractory.zone
+            )
+        )
     }
 
     override fun all(): List<RefractoryDto> {
-        return refractoryRepository.findAll().map { RefractoryDto(it.id, it.name, it.zone, it.properties) }
+        return refractoryRepository.findAll()
+            .map { RefractoryDto(it.id, it.name, it.zone, it.characteristic, it.properties) }
     }
 
     override fun getById(id: Long): Optional<Refractory> {
@@ -30,6 +38,13 @@ class RefractoryServiceImpl(private val refractoryRepository: RefractoryReposito
     }
 
     override fun add(refractory: RefractoryDto) {
-        refractoryRepository.save(Refractory(refractory.id, refractory.name, refractory.zone))
+        refractoryRepository.save(
+            Refractory(
+                refractory.id,
+                refractory.name,
+                refractory.characteristic,
+                refractory.zone
+            )
+        )
     }
 }
