@@ -11,7 +11,7 @@ import org.springframework.security.access.annotation.Secured
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("bd/zone")
+@RequestMapping("bd/zones")
 class ZoneController(
     private val zoneService: ZoneService,
     private val authenticationFacadeService: AuthenticationFacadeService

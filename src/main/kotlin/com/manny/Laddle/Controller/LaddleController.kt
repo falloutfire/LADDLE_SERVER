@@ -21,7 +21,7 @@ import org.springframework.security.core.context.SecurityContextHolder
 
 
 @RestController
-@RequestMapping("bd/laddle")
+@RequestMapping("bd/ladles")
 class LaddleController(
     private val laddleService: LaddleService,
     private val authenticationFacadeService: AuthenticationFacadeService

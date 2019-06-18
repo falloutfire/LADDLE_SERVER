@@ -9,7 +9,7 @@ import org.springframework.security.access.annotation.Secured
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("bd/property")
+@RequestMapping("bd/properties")
 class PropertyController(
     private val propertyService: PropertyService,
     private val authenticationFacadeService: AuthenticationFacadeService

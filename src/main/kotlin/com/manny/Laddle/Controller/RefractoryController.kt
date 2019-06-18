@@ -9,7 +9,7 @@ import org.springframework.security.access.annotation.Secured
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("bd/refractory")
+@RequestMapping("bd/refractories")
 class RefractoryController(
     private val refractoryService: RefractoryService,
     private val authenticationFacadeService: AuthenticationFacadeService
