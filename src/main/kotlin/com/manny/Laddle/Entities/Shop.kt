@@ -10,11 +10,11 @@ import javax.persistence.*
 class Shop(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    val id: Long,
+    var id: Long,
     @Column(name = "name")
-    val name: String,
+    var name: String,
     @Column(name = "employees_number")
-    val employeesNumber: Int,
+    var employeesNumber: Int,
     @OneToMany(mappedBy = "shop", fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     var laddles: List<Laddle>? = null,

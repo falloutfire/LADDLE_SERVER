@@ -10,9 +10,9 @@ import javax.persistence.*
 class Refractory(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    val id: Long,
+    var id: Long,
     @Column(name = "name")
-    val name: String,
+    var name: String,
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "zone_id", nullable = false)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
