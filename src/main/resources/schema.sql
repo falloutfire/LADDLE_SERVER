@@ -64,13 +64,14 @@ create table refractory
 
 create table property
 (
-    id            bigint not null
+    id             bigint not null
         constraint property_pkey
             primary key,
-    name          varchar(255),
-    type          varchar(255),
-    value         varchar(255),
-    refractory_id bigint not null
+    characteristic varchar(255),
+    name           varchar(255),
+    type           varchar(255),
+    value          varchar(255),
+    refractory_id  bigint not null
         constraint fkjfyll53w6wir63d59x7qbaovd
             references refractory
 );
@@ -135,8 +136,8 @@ INSERT INTO zone(id, name, laddle_id)
 VALUES (1, 'Зона 1', 1);
 INSERT INTO refractory(id, name, zone_id)
 VALUES (1, 'Огнеупор', 1);
-INSERT INTO property(id, name, value, refractory_id, type)
-VALUES (1, 'Свойство', 1, 1, 'Тип');
+INSERT INTO property(id, name, value, refractory_id, type, characteristic)
+VALUES (1, 'Свойство', 1, 1, 'Тип', 'Характеристика');
 INSERT INTO point(id, x, y, zone_id)
 VALUES (1, 1, 1, 1);
 
