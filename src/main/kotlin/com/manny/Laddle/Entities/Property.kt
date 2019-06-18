@@ -17,9 +17,11 @@ class Property(
     val value: String,
     @Column(name = "type")
     val type: String,
+    @Column(name = "characteristic")
+    val characteristic: String,
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "refractory_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     @JsonIgnore
     var refractory: Refractory
 )
@@ -29,5 +31,6 @@ class PropertyDto(
     val name: String,
     val value: String,
     val type: String,
+    val characteristic: String,
     var refractory: Refractory
 )

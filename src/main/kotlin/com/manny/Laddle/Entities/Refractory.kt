@@ -15,6 +15,7 @@ class Refractory(
     val name: String,
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "zone_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     @JsonIgnore
     var zone: Zone?,
     @OneToMany(mappedBy = "refractory", cascade = [CascadeType.REMOVE])

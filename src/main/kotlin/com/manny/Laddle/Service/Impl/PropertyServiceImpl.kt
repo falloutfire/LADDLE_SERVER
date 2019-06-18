@@ -20,6 +20,7 @@ class PropertyServiceImpl(private val propertyRepository: PropertyRepository) : 
                 property.name,
                 property.value,
                 property.type,
+                property.characteristic,
                 property.refractory
             )
         )
@@ -39,7 +40,8 @@ class PropertyServiceImpl(private val propertyRepository: PropertyRepository) : 
     }
 
     override fun all(): List<PropertyDto> {
-        return propertyRepository.findAll().map { PropertyDto(it.id, it.name, it.value, it.type, it.refractory) }
+        return propertyRepository.findAll()
+            .map { PropertyDto(it.id, it.name, it.value, it.type, it.characteristic, it.refractory) }
     }
 
     override fun getById(id: Long): Optional<Property> {
@@ -57,6 +59,7 @@ class PropertyServiceImpl(private val propertyRepository: PropertyRepository) : 
                 property.name,
                 property.value,
                 property.type,
+                property.characteristic,
                 property.refractory
             )
         )

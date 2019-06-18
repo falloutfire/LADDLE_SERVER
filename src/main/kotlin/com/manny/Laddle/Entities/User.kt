@@ -1,7 +1,8 @@
 package com.manny.Laddle.Entities
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import org.hibernate.annotations.Cascade
+import org.hibernate.annotations.OnDelete
+import org.hibernate.annotations.OnDeleteAction
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
@@ -40,9 +41,10 @@ class User(
         inverseJoinColumns = [JoinColumn(name = "role_id", referencedColumnName = "id")]
     )
     var roles: List<Role>? = null,
-    @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.DETACH])
+    @ManyToOne(fetch = FetchType.LAZY/*, cascade = [CascadeType.DETACH]*/)
     @JoinColumn(name = "shop_id", nullable = true)
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    //@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     @JsonIgnore
     var shop: Shop?
 ) : UserDetails {

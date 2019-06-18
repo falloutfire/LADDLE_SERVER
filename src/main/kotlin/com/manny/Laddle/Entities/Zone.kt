@@ -15,7 +15,7 @@ class Zone(
     val name: String,
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "laddle_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     @JsonIgnore
     var laddle: Laddle?,
     @OneToMany(mappedBy = "zone", cascade = [CascadeType.REMOVE])

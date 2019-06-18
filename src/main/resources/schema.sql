@@ -18,9 +18,6 @@ create table shop
     name             varchar(255)
 );
 
-INSERT INTO shop(id, name, employees_number)
-VALUES (1, 'Цех номер 1', 100);
-
 
 -- ************************************** "Ladle"
 
@@ -34,10 +31,10 @@ create table laddle
     shop_id bigint not null
         constraint fkenejp0s83ufpfixrdwy55cdbi
             references shop
+            on delete cascade
 );
 
-INSERT INTO laddle(id, name, photo, shop_id)
-VALUES (1, 'Ковш 1', '1', 1);
+
 
 create table zone
 (
@@ -50,8 +47,6 @@ create table zone
             references laddle
 );
 
-INSERT INTO zone(id, name, laddle_id)
-VALUES (1, 'Зона 1', 1);
 -- ************************************** "Refractory"
 
 create table refractory
@@ -65,8 +60,6 @@ create table refractory
             references zone
 );
 
-INSERT INTO refractory(id, name, zone_id)
-VALUES (1, 'Огнеупор', 1);
 -- ************************************** "Property"
 
 create table property
@@ -82,8 +75,6 @@ create table property
             references refractory
 );
 
-INSERT INTO property(id, name, value, refractory_id, type)
-VALUES (1, 'Свойство', 1, 1, 'Тип');
 -- ************************************** "Point"
 
 create table point
@@ -98,10 +89,6 @@ create table point
             references zone
 );
 
-INSERT INTO point(id, x, y, zone_id)
-VALUES (1, 1, 1, 1);
-
-
 create table role
 (
     id          bigserial not null
@@ -111,6 +98,9 @@ create table role
     role_name   varchar(255)
 );
 
+drop table if exists user_role CASCADE;
+drop table if exists role CASCADE;
+drop table if exists users CASCADE;
 
 create table users
 (
@@ -124,7 +114,7 @@ create table users
     password    varchar(255),
     shop_id     bigint
         constraint fkfesbkulej4bo8neiy68turcbo
-            references shop
+            references shop on delete set null
 );
 
 create table user_role
@@ -136,6 +126,19 @@ create table user_role
         constraint fka68196081fvovjhkek5m97n3y
             references role
 );
+
+INSERT INTO shop(id, name, employees_number)
+VALUES (1, 'Цех номер 1', 100);
+INSERT INTO laddle(id, name, photo, shop_id)
+VALUES (1, 'Ковш 1', '1', 1);
+INSERT INTO zone(id, name, laddle_id)
+VALUES (1, 'Зона 1', 1);
+INSERT INTO refractory(id, name, zone_id)
+VALUES (1, 'Огнеупор', 1);
+INSERT INTO property(id, name, value, refractory_id, type)
+VALUES (1, 'Свойство', 1, 1, 'Тип');
+INSERT INTO point(id, x, y, zone_id)
+VALUES (1, 1, 1, 1);
 
 INSERT INTO role (id, role_name, description)
 VALUES (1, 'ROLE_USER', 'Standard User - Has no admin rights');

@@ -3,7 +3,6 @@ package com.manny.Laddle.Entities
 import com.fasterxml.jackson.annotation.JsonIgnore
 import org.hibernate.annotations.OnDelete
 import org.hibernate.annotations.OnDeleteAction
-import org.springframework.security.core.context.SecurityContextHolder
 import javax.persistence.*
 
 @Entity
@@ -16,8 +15,9 @@ class Laddle(
     val name: String,
     @Column(name = "photo")
     val photo: ByteArray,
-    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = [CascadeType.REMOVE])
+    @ManyToOne(fetch = FetchType.LAZY, optional = false/*, cascade = [CascadeType.REMOVE]*/)
     @JoinColumn(name = "shop_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     @JsonIgnore
     var shop: Shop,
     @OneToMany(mappedBy = "laddle", cascade = [CascadeType.REMOVE])
