@@ -10,11 +10,11 @@ import javax.persistence.*
 class Laddle(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    val id: Long,
+    var id: Long,
     @Column(name = "name")
-    val name: String,
+    var name: String,
     @Column(name = "photo")
-    val photo: ByteArray,
+    var photo: ByteArray,
     @ManyToOne(fetch = FetchType.LAZY, optional = false/*, cascade = [CascadeType.REMOVE]*/)
     @JoinColumn(name = "shop_id", nullable = false)
     @OnDelete(action = OnDeleteAction.NO_ACTION)

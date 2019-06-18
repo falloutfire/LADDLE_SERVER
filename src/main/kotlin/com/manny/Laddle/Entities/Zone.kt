@@ -10,9 +10,9 @@ import javax.persistence.*
 class Zone(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    val id: Long,
+    var id: Long,
     @Column(name = "name")
-    val name: String,
+    var name: String,
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "laddle_id", nullable = false)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
@@ -26,7 +26,7 @@ class Zone(
 
 class ZoneDto(
     val id: Long,
-    val name: String,
+    var name: String,
     var laddle: Laddle?,
     var points: List<Point>? = null,
     var refractories: List<Refractory>? = null

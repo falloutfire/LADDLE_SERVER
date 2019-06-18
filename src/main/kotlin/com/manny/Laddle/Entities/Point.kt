@@ -10,11 +10,11 @@ import javax.persistence.*
 class Point(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    val id: Long,
+    var id: Long,
     @Column(name = "x")
-    val x: Int,
+    var x: Int,
     @Column(name = "y")
-    val y: Int,
+    var y: Int,
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "zone_id", nullable = false)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
