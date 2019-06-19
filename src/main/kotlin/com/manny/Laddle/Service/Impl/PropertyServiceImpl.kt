@@ -48,7 +48,7 @@ class PropertyServiceImpl(private val propertyRepository: PropertyRepository) : 
     }
 
     override fun find(property: PropertyDto): Optional<Property> {
-        return propertyRepository.findPropertyByName(property.name)
+        return propertyRepository.findById(property.id)
     }
 
     override fun add(property: PropertyDto) {

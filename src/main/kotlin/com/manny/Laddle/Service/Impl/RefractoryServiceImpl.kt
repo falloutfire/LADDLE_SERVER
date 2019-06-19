@@ -34,7 +34,7 @@ class RefractoryServiceImpl(private val refractoryRepository: RefractoryReposito
     }
 
     override fun find(refractory: RefractoryDto): Optional<Refractory> {
-        return refractoryRepository.findRefractoryByName(refractory.name)
+        return refractoryRepository.findById(refractory.id)
     }
 
     override fun add(refractory: RefractoryDto) {
