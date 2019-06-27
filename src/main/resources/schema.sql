@@ -216,6 +216,9 @@ create table ClientDetails
     autoApproveScopes      VARCHAR(255)
 );
 
+INSERT INTO shop (id, employees_number, name)
+VALUES (1, 100, 'Цех №1');
+
 INSERT INTO role (id, role_name, description)
 VALUES (1, 'ROLE_USER', 'Standard User - Has no admin rights');
 INSERT INTO role (id, role_name, description)
